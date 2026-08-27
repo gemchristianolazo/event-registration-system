@@ -1,0 +1,18 @@
+{
+  "slug": "tup-manila-campus-event-registration-system",
+  "title": "TUP Manila Campus Event Registration System",
+  "date": "2026-08-27",
+  "artifacts": [
+    "intent.json",
+    "prd.md",
+    "mvp-scope.md",
+    "flow.json",
+    "user-flow.md",
+    "adr.md",
+    "stack.json",
+    "starter/",
+    "design-system.md",
+    "pitch-deck.md",
+    "run.json"
+  ]
+}

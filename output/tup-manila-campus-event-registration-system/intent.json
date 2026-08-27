@@ -1,0 +1,26 @@
+{
+  "title": "TUP Manila Campus Event Registration System",
+  "slug": "tup-manila-campus-event-registration-system",
+  "date": "2026-08-27",
+  "status": "draft",
+  "idea": "A campus event registration system for TUP Manila with school email login, capacity-aware event registration, QR check-in, attendance tools, announcements, cancellation, and real-time capacity tracking.",
+  "audience": ["TUP Manila students", "event organizers", "attendance staff"],
+  "constraints": {
+    "hours": 6,
+    "team_size": 5,
+    "skill_level": "beginner"
+  },
+  "assumptions": [
+    "TUP Manila users have an institution-managed email domain; the exact domain must be confirmed before production.",
+    "An organizer can create and manage events, while a student can register for published events.",
+    "The MVP uses Supabase Auth, Postgres, Realtime, and Storage to avoid building custom infrastructure.",
+    "QR scanning can use a browser camera library in a later implementation slice; the MVP ticket QR is generated and displayed.",
+    "The stated hours are total wall-clock time and the MVP scope applies the kit's 0.6 overhead factor."
+  ],
+  "open_questions": [
+    "What exact TUP Manila email domain or domains are allowed?",
+    "Which roles may publish events and scan attendance?",
+    "Should QR codes be invalidated after first successful check-in?",
+    "What retention period applies to attendance and exported files?"
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "title": "TUP Manila Campus Event Registration",
+  "summary": "A TUP Manila student signs in, selects an available event, registers once, and receives a QR ticket.",
+  "edge_cases": [
+    "The email domain is not an allowed TUP Manila domain.",
+    "The event becomes full while the student is submitting registration.",
+    "The student already has a registration for the event.",
+    "The student tries to cancel inside the 24-hour window.",
+    "The QR ticket is cancelled and must not be accepted at check-in."
+  ],
+  "nodes": [
+    {"id":"start","type":"start","stage":"Access","label":"Open event portal","description":"The student opens the campus event portal and chooses to sign in."},
+    {"id":"enter-school-email","type":"action","stage":"Access","label":"Enter school email","description":"The student enters a TUP Manila school email address."},
+    {"id":"email-allowed","type":"decision","stage":"Access","label":"Email domain allowed?","description":"The system checks whether the email belongs to the configured TUP Manila domain."},
+    {"id":"sign-in-error","type":"end","stage":"Access","label":"Show sign-in error","description":"The system explains that only an allowed school email can continue."},
+    {"id":"view-events","type":"action","stage":"Discover","label":"View event listings","description":"The authenticated student sees published events, dates, venues, and remaining capacity."},
+    {"id":"event-available","type":"decision","stage":"Discover","label":"Seat available?","description":"The system checks whether the selected event still has capacity."},
+    {"id":"event-full","type":"end","stage":"Discover","label":"Show event full","description":"The student sees that registration is closed because the event has reached capacity."},
+    {"id":"register-event","type":"action","stage":"Reserve","label":"Register with one click","description":"The student selects Register and the server creates one registration with a capacity-safe check."},
+    {"id":"registration-accepted","type":"decision","stage":"Reserve","label":"Registration accepted?","description":"The system reports whether the write succeeded, was a duplicate, or lost a capacity race."},
+    {"id":"registration-error","type":"end","stage":"Reserve","label":"Explain registration result","description":"The system explains duplicate, full, or temporary failure and offers the correct next action."},
+    {"id":"show-qr-ticket","type":"action","stage":"Ticket","label":"Display unique QR ticket","description":"The system shows the confirmed event ticket with its unique opaque QR token."},
+    {"id":"cancel-before-deadline","type":"decision","stage":"Ticket","label":"Cancel before deadline?","description":"The student may choose to cancel only while more than 24 hours remain and check-in has not happened."},
+    {"id":"cancel-ticket","type":"action","stage":"Ticket","label":"Cancel registration","description":"The system marks the registration cancelled, invalidates the ticket, and releases the seat."},
+    {"id":"ticket-ready","type":"end","stage":"Ticket","label":"Ticket ready for check-in","description":"The student keeps the active QR ticket for future attendance verification."},
+    {"id":"cancellation-blocked","type":"end","stage":"Ticket","label":"Keep active ticket","description":"The system explains that the cancellation window has closed and leaves the active ticket unchanged."}
+  ],
+  "edges": [
+    {"from":"start","to":"enter-school-email"},
+    {"from":"enter-school-email","to":"email-allowed"},
+    {"from":"email-allowed","to":"view-events","condition":"yes","note":"Continue to the published event list"},
+    {"from":"email-allowed","to":"sign-in-error","condition":"no","note":"Access is restricted to the configured school domain"},
+    {"from":"view-events","to":"event-available"},
+    {"from":"event-available","to":"register-event","condition":"yes","note":"The Register action is enabled"},
+    {"from":"event-available","to":"event-full","condition":"no","note":"The event is labeled Full"},
+    {"from":"register-event","to":"registration-accepted"},
+    {"from":"registration-accepted","to":"show-qr-ticket","condition":"new registration accepted"},
+    {"from":"registration-accepted","to":"show-qr-ticket","condition":"already registered","note":"Reuse the existing registration and ticket"},
+    {"from":"registration-accepted","to":"registration-error","condition":"full or temporary failure"},
+    {"from":"show-qr-ticket","to":"cancel-before-deadline"},
+    {"from":"cancel-before-deadline","to":"cancel-ticket","condition":"student confirms cancellation in time"},
+    {"from":"cancel-before-deadline","to":"ticket-ready","condition":"student keeps registration"},
+    {"from":"cancel-before-deadline","to":"cancellation-blocked","condition":"deadline passed or already checked in"},
+    {"from":"cancel-ticket","to":"cancellation-blocked","condition":"ticket is now cancelled","note":"The exit label explains the cancelled state"}
+  ]
+}

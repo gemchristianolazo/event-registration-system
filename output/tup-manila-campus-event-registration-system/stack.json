@@ -1,0 +1,6 @@
+{
+  "project_name": "tup-manila-campus-event-registration-system",
+  "frontend": {"kind": "react-vite", "notes": "Beginner-friendly responsive web UI."},
+  "backend": {"kind": "node-express", "notes": "Small API boundary for future protected operations and local development."},
+  "database": {"kind": "supabase", "notes": "Supabase Auth, Postgres, Realtime, and Storage match the PRD and avoid custom infrastructure."}
+}
