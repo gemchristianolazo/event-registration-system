@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # DEVCON Jumpstart Agent Kit
 
 Turn a one-line product idea into a full set of **development-ready planning documents** — a PRD, a user-flow, an architecture decision record, and a design system — using **free-tier AI models**, inside whichever agent CLI you already use (**OpenCode**, **Claude Code**, or **Cursor**).
@@ -493,8 +492,3 @@ Nothing existing changes.
 ---
 
 Built for DEVCON. Idea in, blueprint out.
-=======
-## Event Registration System for TUP Manila students
-
-- UI only
->>>>>>> 806d3983eb2e13136d0cf97a52578fbc29f73e1d
