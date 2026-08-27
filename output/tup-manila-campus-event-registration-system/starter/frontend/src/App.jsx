@@ -10,7 +10,7 @@ const initialEvents = [
   { id: 'sports', title: 'Intramurals Opening Day', category: 'Sports', date: 'Oct 03, 2026', time: '8:00 AM - 3:00 PM', venue: 'TUP Manila Oval', description: 'Cheer for your college and celebrate the opening of this year\'s intramural season.', capacity: 300, registered: 96, accent: 'blue', organizer: 'University Sports Committee' },
 ]
 
-const currentUser = { name: 'Cleo Jane Torres', email: 'cleojane.torres@tup.edu.ph', id: '2023-00142' }
+const currentUser = { name: 'Cleo Jane Torres', email: 'cleojane.torres@tup.edu.ph', id: 'TUPM-23-0142' }
 const iconProps = { size: 16, strokeWidth: 2, 'aria-hidden': true }
 
 function App() {
